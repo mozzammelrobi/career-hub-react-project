@@ -3,6 +3,8 @@ import JobsCard from "../JobsCard/JobsCard";
 
 const FeaturedJobs = () => {
     const [jobs, setJobs] = useState([])
+    // load only four data until clicked show all data
+    const [dataLength, setDataLength] = useState(4)
 
     useEffect(() => {
         fetch('jobs.json')
@@ -15,10 +17,15 @@ const FeaturedJobs = () => {
                 <h1 className="text-5xl">Featured Jobs: {jobs.length}</h1>
                 <p>Explore thousands of job opportunities with all the information you need. Its your future</p>
             </div>
-            <div>
+            <div className="grid grid-cols-2 gap-6">
                 {
-                    jobs.map((job) => <JobsCard key={job.id} job={job}></JobsCard>)
+                    jobs.slice(0,dataLength).map((job) => <JobsCard key={job.id} job={job}></JobsCard>)
                 }
+            </div>
+            <div className={dataLength === jobs.length && 'hidden'}>
+                <button
+                onClick={() => setDataLength(jobs.length)}
+                className="btn btn-primary">Show all Jobs</button>
             </div>
         </div>
     );

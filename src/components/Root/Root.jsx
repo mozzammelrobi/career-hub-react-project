@@ -6,8 +6,10 @@ const Root = () => {
     return (
         <div>
             <h2 className="text-5xl">hellow from Root</h2>
-            <Header></Header>
-            <Outlet></Outlet>
+            <div className="max-w-6xl mx-auto">
+                <Header></Header>
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );
